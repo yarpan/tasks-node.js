@@ -27,7 +27,7 @@ async function findLargestFile(directory) {
   }
 }
 
-const directoryToSearch = './src/largest-file'; // Замініть на потрібну директорію
+const directoryToSearch = './src/largest-file';
 
 findLargestFile(directoryToSearch)
   .then(largest => {
