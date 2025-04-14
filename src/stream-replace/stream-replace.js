@@ -3,8 +3,8 @@
 const fs = require('fs');
 const { Transform } = require('stream');
 
-const inputFilePath = './src/stream-replace/file_input.txt';
-const outputFilePath = './src/stream-replace/file_output.txt';
+const inputFilePath = './src/stream-replace/file-input.txt';
+const outputFilePath = './src/stream-replace/file-output.txt';
 
 
 class PasswordMasker extends Transform {
