@@ -1,13 +1,17 @@
 
+# Образ Node.js
 FROM node:18
 
-WORKDIR /usr/src/app
+# Робоча папка
+WORKDIR /app
 
-COPY package.json ./
+# Копіюємо файли
+COPY package*.json ./
 RUN npm install
-
 COPY . .
 
+# Порт
 EXPOSE 3000
 
-CMD [ "npm", "start" ]
+# Команда запуску
+CMD ["npm", "start"]
