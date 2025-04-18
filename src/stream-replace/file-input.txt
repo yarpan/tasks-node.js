@@ -1,0 +1,13 @@
+User's Password: password123
+Temporary Password: PaSSwordTEMP
+Please reset your password as soon as possible.
+Secure Password Guide: How to create a strong PASSWORD
+PASSWORD is required for authentication.
+Your PaSSWORD has expired. Please update it.
+----
+User's Password: password123
+Temporary Password: PaSSwordTEMP
+Please reset your password as soon as possible.
+Secure Password Guide: How to create a strong PASSWORD
+PASSWORD is required for authentication.
+Your PaSSWORD has expired. Please update it.
