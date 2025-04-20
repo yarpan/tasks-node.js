@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  app-service-x:
+    build:
+      context: ./app-service-x
+      dockerfile: Dockerfile
+    container_name: app-service-x
+    ports:
+      - "5001:5001"
+    volumes:
+      - app-service-x-data:/data-store
+      - ./app-service-x/node_modules:/app/node_modules
+    networks:
+      - app-network
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - SERVICE_NAME=app-service-x
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001"]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+
+  app-service-y:
+    build:
+      context: ./app-service-y
+      dockerfile: Dockerfile
+    container_name: app-service-y
+    ports:
+      - "5002:5002"
+    volumes:
+      - app-service-y-data:/data-store
+      - ./app-service-y/node_modules:/app/node_modules
+    networks:
+      - app-network
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - SERVICE_NAME=app-service-y
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5002"]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+
+volumes:
+  app-service-x-data:
+  app-service-y-data:
+
+networks:
+  app-network:
+    driver: bridge
