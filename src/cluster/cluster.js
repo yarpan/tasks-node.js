@@ -5,9 +5,10 @@ const cluster = require('cluster');
 const os = require('os');
 const http = require('http');
 const calculateFactorial = require('./factorial');
-const generateWeightedRandomNumbers = require('./randomizer'); // Import randomizer
+const generateWeightedRandomNumbers = require('./randomizer');
 
 const PORT = process.env.PORT || 3000;
+
 
 if (cluster.isMaster) {
     const numCPUs = os.cpus().length;
@@ -37,6 +38,7 @@ if (cluster.isMaster) {
 
     }
 
+
     const distributeTasks = (numbers, res) => {
         pendingTasks = numbers.length;
         results = {};
@@ -62,11 +64,12 @@ if (cluster.isMaster) {
         }, 50);
     };
 
+
     const server = http.createServer((req, res) => {
         const url = new URL(req.url, `http://localhost:${PORT}`);
         if (url.pathname === '/factorial') {
             const range = parseInt(url.searchParams.get('range') || numCPUs, 10);
-            const numbers = generateWeightedRandomNumbers(range, Math.min(range, numCPUs)); // Use imported randomizer
+            const numbers = generateWeightedRandomNumbers(range, Math.min(range, numCPUs));
             distributeTasks(numbers, res);
         } else {
             res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });

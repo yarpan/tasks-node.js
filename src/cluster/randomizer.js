@@ -1,4 +1,4 @@
-// Generate weighted random numbers
+
 function generateWeightedRandomNumbers(range, count) {
     const weights = Array.from({ length: range }, (_, i) => 1 / (i + 1)); 
     const totalWeight = weights.reduce((sum, weight) => sum + weight, 0); 
