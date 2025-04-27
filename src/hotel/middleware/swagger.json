@@ -118,6 +118,98 @@
       }
     },
     "/guests": {
+      "get": {
+        "tags": ["GUESTS"],
+        "summary": "Get all guests with filters and pagination",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Filter by guest ID",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "description": "Filter by first name (case-insensitive)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Alexander"
+            }
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "description": "Filter by last name (case-insensitive)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "Petrenko"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Filter by email (case-insensitive)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "alexander.petrenko@example.com"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of records to retrieve",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of records to skip",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of guests retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "guest_id": { "type": "integer", "example": 1 },
+                      "first_name": { "type": "string", "example": "Alexander" },
+                      "last_name": { "type": "string", "example": "Petrenko" },
+                      "email": { "type": "string", "example": "alexander.petrenko@example.com" },
+                      "phone": { "type": "string", "example": "+1234567890" },
+                      "address": { "type": "string", "example": "Kyiv, Independence Street, 12" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
       "post": {
         "tags": ["GUESTS"],
         "summary": "Add a new guest",
@@ -156,6 +248,50 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/guests/{guest_id}": {
+      "get": {
+        "tags": ["GUESTS"],
+        "summary": "Get guest details by ID",
+        "parameters": [
+          {
+            "name": "guest_id",
+            "in": "path",
+            "description": "ID of the guest to retrieve",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Guest details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "guest_id": { "type": "integer", "example": 1 },
+                    "first_name": { "type": "string", "example": "Alexander" },
+                    "last_name": { "type": "string", "example": "Petrenko" },
+                    "email": { "type": "string", "example": "alexander.petrenko@example.com" },
+                    "phone": { "type": "string", "example": "+1234567890" },
+                    "address": { "type": "string", "example": "Kyiv, Independence Street, 12" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Guest not found"
           },
           "500": {
             "description": "Internal server error"

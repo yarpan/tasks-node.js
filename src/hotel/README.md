@@ -16,7 +16,7 @@ This project provides an API for managing a hotel with the following features:
 ```bash
 # 1. Clone the repository:
 git clone https://your-repo-url.git
-cd hotel-management
+cd hotel
 
 # 2. Install dependencies:
 npm install
@@ -38,133 +38,44 @@ node server.js
 # Server is running on http://localhost:3000
 ```
 
-## 📡 API Usage
+## REST API Usage
 
-### 1. Find all available rooms for a specific date
-
-**Request:**
-```bash
-curl -X GET "http://localhost:3000/rooms/available?date=2025-04-20"
+**All detailed information is on SWAGGER page**
+```
+http://localhost:3000/api-docs/
 ```
 
-**Expected Response:**
-```json
-[
-    {
-        "room_id": 2,
-        "room_number": "102",
-        "type": "Deluxe",
-        "price": 120.00,
-        "status": "available",
-        "created_at": "2025-01-15T10:00:00.000Z"
-    },
-    {
-        "room_id": 5,
-        "room_number": "203",
-        "type": "Standard",
-        "price": 80.00,
-        "status": "available",
-        "created_at": "2025-02-05T14:00:00.000Z"
-    }
-]
+
+## Project Structure
 ```
-
-### 2. Add a new guest
-
-**Request:**
-```bash
-curl -X POST http://localhost:3000/guests \
--H "Content-Type: application/json" \
--d '{
-    "first_name": "Alexander",
-    "last_name": "Petrenko",
-    "email": "alexander.petrenko@example.com",
-    "phone": "+1234567890",
-    "address": "Kyiv, Independence Street, 12"
-}'
-```
-
-**Expected Response:**
-```json
-{
-    "guest_id": 1,
-    "first_name": "Alexander",
-    "last_name": "Petrenko",
-    "email": "alexander.petrenko@example.com",
-    "phone": "+1234567890",
-    "address": "Kyiv, Independence Street, 12",
-    "created_at": "2025-04-27T14:00:00.000Z"
-}
-```
-
-### 3. Book a room for a specific guest
-
-**Request:**
-```bash
-curl -X POST http://localhost:3000/bookings \
--H "Content-Type: application/json" \
--d '{
-    "guest_id": 1,
-    "room_id": 2,
-    "check_in": "2025-04-20",
-    "check_out": "2025-04-25",
-    "total_price": 500.00
-}'
-```
-
-**Expected Response:**
-```json
-{
-    "booking_id": 1,
-    "guest_id": 1,
-    "room_id": 2,
-    "check_in": "2025-04-20",
-    "check_out": "2025-04-25",
-    "total_price": 500.00,
-    "status": "confirmed",
-    "created_at": "2025-04-27T14:00:00.000Z"
-}
-```
-
-### 4. Calculate the hotel's revenue for a specific month
-
-**Request:**
-```bash
-curl -X GET "http://localhost:3000/bookings/revenue?year=2025&month=4"
-```
-
-**Expected Response:**
-```json
-{
-    "revenue": 5000.00
-}
-```
-
-## 📂 Project Structure
-```
-hotel-management/
-├── server.js
-├── .env
-├── package.json
-├── package-lock.json
-├── db/
-│   └── db.js
-├── models/
-│   ├── Guest.js
-│   ├── Room.js
-│   └── Booking.js
-├── controllers/
+hotel/
+├── controllers
+│   ├── bookingsController.js
 │   ├── guestsController.js
-│   ├── roomsController.js
-│   └── bookingsController.js
-├── routes/
+│   └── roomsController.js
+├── db
+│   └── db.js
+├── logs
+│   └── server.log
+├── middleware
+│   ├── logger.js
+│   └── swagger.json
+├── models
+│   ├── Booking.js
+│   ├── Guest.js
+│   └── Room.js
+├── routes
+│   ├── bookingsRoutes.js
 │   ├── guestsRoutes.js
 │   ├── roomsRoutes.js
-│   └── bookingsRoutes.js
-└── logs/
+│   └── swagger.js
+├── docker-compose.yml
+├── Dockerfile
+├── README.md
+└── server.js
 ```
 
-## 🐳 Using Docker
+## Using Docker
 
 Create a `docker-compose.yml` file for the project.  
 Start the containers:
