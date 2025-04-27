@@ -1,0 +1,9 @@
+[2025-04-27T12:41:19.704Z] GET /rooms/available?date=2025-04-20
+[2025-04-27T12:41:23.042Z] GET /bookings/revenue?year=2025&month=4
+[2025-04-27T12:57:52.904Z] GET /api-docs/
+[2025-04-27T12:57:52.945Z] GET /api-docs/swagger-ui.css
+[2025-04-27T12:57:52.947Z] GET /api-docs/swagger-ui-bundle.js
+[2025-04-27T12:57:52.950Z] GET /api-docs/swagger-ui-standalone-preset.js
+[2025-04-27T12:57:52.951Z] GET /api-docs/swagger-ui-init.js
+[2025-04-27T12:57:53.140Z] GET /api-docs/favicon-32x32.png
+[2025-04-27T13:02:02.808Z] GET /rooms/getRoomBookings/1
