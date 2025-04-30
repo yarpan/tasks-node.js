@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результат виконання</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        pre { background: #f4f4f4; padding: 10px; border: 1px solid #ddd; }
+        h1 { color: #333; }
+    </style>
+</head>
+<body>
+    <h1>Результат команди: <%= command %></h1>
+    <pre><%= output %></pre>
+    <a href="/execute?cmd=ls">Виконати 'ls'</a> |
+    <a href="/execute?cmd=dir">Виконати 'dir'</a> |
+    <a href="/">На головну</a>
+</body>
+</html>
