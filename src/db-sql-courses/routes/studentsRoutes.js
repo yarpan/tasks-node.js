@@ -36,4 +36,25 @@ router.get('/students/top', async (req, res) => {
     }
 });
 
+router.post('/students', async (req, res) => {
+    try {
+        const { name } = req.body;
+        if (!name) {
+            return res.status(400).json({ error: 'Необхідно вказати ім’я студента' });
+        }
+
+        const result = await pool.query(
+            'INSERT INTO students (name) VALUES ($1) RETURNING *',
+            [name]
+        );
+
+        logger.info(`Студент доданий: ${JSON.stringify(result.rows[0])}`);
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        logger.error(`Помилка додавання студента: ${error.message}`);
+        res.status(500).json({ error: 'Помилка додавання студента' });
+    }
+});
+
+
 module.exports = router;

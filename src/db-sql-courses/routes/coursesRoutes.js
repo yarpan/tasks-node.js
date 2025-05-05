@@ -42,4 +42,24 @@ router.get('/courses/high-rated/:minGrade', async (req, res) => {
     }
 });
 
+router.post('/courses', async (req, res) => {
+    try {
+        const { name } = req.body;
+        if (!name) {
+            return res.status(400).json({ error: 'Необхідно вказати назву курсу' });
+        }
+
+        const result = await pool.query(
+            'INSERT INTO courses (name) VALUES ($1) RETURNING *',
+            [name]
+        );
+
+        logger.info(`Курс доданий: ${JSON.stringify(result.rows[0])}`);
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        logger.error(`Помилка додавання курсу: ${error.message}`);
+        res.status(500).json({ error: 'Помилка додавання курсу' });
+    }
+});
+
 module.exports = router;

@@ -6,13 +6,15 @@ const swaggerDocument = require('./swagger.json')
 
 const studentsRoutes = require('./routes/studentsRoutes');
 const coursesRoutes = require('./routes/coursesRoutes');
+const enrollmentsRoutes = require('./routes/enrollmentsRoutes');
+
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
 app.use('/api', studentsRoutes);
 app.use('/api', coursesRoutes);
-
-const PORT = process.env.PORT || 3000;
+app.use('/api', enrollmentsRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

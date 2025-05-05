@@ -12,7 +12,8 @@
   ],
   "tags": [
     { "name": "Students", "description": "Операції зі студентами" },
-    { "name": "Courses", "description": "Операції з курсами" }
+    { "name": "Courses", "description": "Операції з курсами" },
+    { "name": "Enrollments", "description": "Записи студентів у курсах" }
   ],
   "paths": {
     "/students": {
@@ -20,23 +21,28 @@
         "summary": "Отримати всіх студентів",
         "tags": ["Students"],
         "responses": {
-          "200": {
-            "description": "Список студентів",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": { "type": "integer" },
-                      "name": { "type": "string" }
-                    }
-                  }
-                }
+          "200": { "description": "Список студентів" }
+        }
+      },
+      "post": {
+        "summary": "Додати нового студента",
+        "tags": ["Students"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" }
+                },
+                "required": ["name"]
               }
             }
           }
+        },
+        "responses": {
+          "201": { "description": "Студент доданий" }
         }
       }
     },
@@ -45,9 +51,7 @@
         "summary": "Отримати середній бал студентів",
         "tags": ["Students"],
         "responses": {
-          "200": {
-            "description": "Середні оцінки студентів"
-          }
+          "200": { "description": "Середні оцінки студентів" }
         }
       }
     },
@@ -56,9 +60,7 @@
         "summary": "Отримати студента з найвищим середнім балом",
         "tags": ["Students"],
         "responses": {
-          "200": {
-            "description": "Найкращий студент"
-          }
+          "200": { "description": "Найкращий студент" }
         }
       }
     },
@@ -71,16 +73,12 @@
             "name": "courseName",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            },
+            "schema": { "type": "string" },
             "description": "Назва курсу"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Список студентів"
-          }
+          "200": { "description": "Список студентів" }
         }
       }
     },
@@ -89,9 +87,28 @@
         "summary": "Отримати всі курси",
         "tags": ["Courses"],
         "responses": {
-          "200": {
-            "description": "Список курсів"
+          "200": { "description": "Список курсів" }
+        }
+      },
+      "post": {
+        "summary": "Додати новий курс",
+        "tags": ["Courses"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" }
+                },
+                "required": ["name"]
+              }
+            }
           }
+        },
+        "responses": {
+          "201": { "description": "Курс доданий" }
         }
       }
     },
@@ -100,9 +117,7 @@
         "summary": "Отримати кількість студентів у кожному курсі",
         "tags": ["Courses"],
         "responses": {
-          "200": {
-            "description": "Кількість студентів у курсах"
-          }
+          "200": { "description": "Кількість студентів у курсах" }
         }
       }
     },
@@ -115,16 +130,44 @@
             "name": "minGrade",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "integer"
-            },
+            "schema": { "type": "integer" },
             "description": "Мінімальний бал"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Список курсів"
+          "200": { "description": "Список курсів" }
+        }
+      }
+    },
+    "/enrollments": {
+      "get": {
+        "summary": "Отримати всі записи студентів у курсах",
+        "tags": ["Enrollments"],
+        "responses": {
+          "200": { "description": "Список записів студентів у курсах" }
+        }
+      },
+      "post": {
+        "summary": "Записати студента на курс",
+        "tags": ["Enrollments"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "student_id": { "type": "integer" },
+                  "course_id": { "type": "integer" },
+                  "grade": { "type": "integer" }
+                },
+                "required": ["student_id", "course_id", "grade"]
+              }
+            }
           }
+        },
+        "responses": {
+          "201": { "description": "Студент записаний на курс" }
         }
       }
     }

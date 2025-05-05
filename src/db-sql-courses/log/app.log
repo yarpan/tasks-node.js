@@ -13,3 +13,10 @@
 {"level":"info","message":"Запит: GET /api-docs/swagger-ui-standalone-preset.js","timestamp":"2025-05-05T20:04:45.180Z"}
 {"level":"info","message":"Запит: GET /api-docs/swagger-ui-init.js","timestamp":"2025-05-05T20:04:45.181Z"}
 {"level":"info","message":"Запит: GET /api-docs/favicon-32x32.png","timestamp":"2025-05-05T20:04:45.301Z"}
+{"level":"info","message":"Запит: GET /api-docs/","timestamp":"2025-05-05T20:12:36.028Z"}
+{"level":"info","message":"Запит: GET /api-docs/swagger-ui.css","timestamp":"2025-05-05T20:12:36.071Z"}
+{"level":"info","message":"Запит: GET /api-docs/swagger-ui-bundle.js","timestamp":"2025-05-05T20:12:36.072Z"}
+{"level":"info","message":"Запит: GET /api-docs/swagger-ui-standalone-preset.js","timestamp":"2025-05-05T20:12:36.074Z"}
+{"level":"info","message":"Запит: GET /api-docs/swagger-ui-init.js","timestamp":"2025-05-05T20:12:36.075Z"}
+{"level":"info","message":"Запит: GET /api-docs/favicon-32x32.png","timestamp":"2025-05-05T20:12:36.271Z"}
+{"level":"info","message":"Отримано список курсів: [{\"id\":6,\"name\":\"Node.js Fundamentals\"},{\"id\":7,\"name\":\"SQL Basics\"},{\"id\":8,\"name\":\"JavaScript Basics\"},{\"id\":9,\"name\":\"TypeScript Advanced\"},{\"id\":10,\"name\":\"Docker Essentials\"}]","timestamp":"2025-05-05T20:13:22.070Z"}
