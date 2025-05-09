@@ -12,13 +12,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use('/api', studentsRoutes);
-app.use('/api', coursesRoutes);
-app.use('/api', enrollmentsRoutes);
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+app.use('/api/students', studentsRoutes);
+app.use('/api/courses', coursesRoutes);
+app.use('/api/enrollments', enrollmentsRoutes);
 
 app.use((req, res, next) => {
     logger.info(`Запит: ${req.method} ${req.url}`);

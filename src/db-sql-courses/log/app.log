@@ -20,3 +20,10 @@
 {"level":"info","message":"Запит: GET /api-docs/swagger-ui-init.js","timestamp":"2025-05-05T20:12:36.075Z"}
 {"level":"info","message":"Запит: GET /api-docs/favicon-32x32.png","timestamp":"2025-05-05T20:12:36.271Z"}
 {"level":"info","message":"Отримано список курсів: [{\"id\":6,\"name\":\"Node.js Fundamentals\"},{\"id\":7,\"name\":\"SQL Basics\"},{\"id\":8,\"name\":\"JavaScript Basics\"},{\"id\":9,\"name\":\"TypeScript Advanced\"},{\"id\":10,\"name\":\"Docker Essentials\"}]","timestamp":"2025-05-05T20:13:22.070Z"}
+{"level":"info","message":"Отримано список курсів: [{\"id\":6,\"name\":\"Node.js Fundamentals\"},{\"id\":7,\"name\":\"SQL Basics\"},{\"id\":8,\"name\":\"JavaScript Basics\"},{\"id\":9,\"name\":\"TypeScript Advanced\"},{\"id\":10,\"name\":\"Docker Essentials\"}]","timestamp":"2025-05-09T20:20:53.895Z"}
+{"level":"info","message":"Запит: GET /favicon.ico","timestamp":"2025-05-09T20:20:53.935Z"}
+{"level":"info","message":"Отримано список курсів: [{\"id\":6,\"name\":\"Node.js Fundamentals\"},{\"id\":7,\"name\":\"SQL Basics\"},{\"id\":8,\"name\":\"JavaScript Basics\"},{\"id\":9,\"name\":\"TypeScript Advanced\"},{\"id\":10,\"name\":\"Docker Essentials\"}]","timestamp":"2025-05-09T20:20:56.234Z"}
+{"level":"info","message":"Запит: GET /api/","timestamp":"2025-05-09T20:21:02.845Z"}
+{"level":"info","message":"Отримано список студентів: [{\"id\":5,\"name\":\"Vasyl Kisyl\"},{\"id\":6,\"name\":\"Natalka Poltavka\"},{\"id\":7,\"name\":\"Petro Mohyla\"},{\"id\":8,\"name\":\"Lesia Ukrainka\"}]","timestamp":"2025-05-09T20:21:20.854Z"}
+{"level":"info","message":"Топ-студент: {\"id\":8,\"name\":\"Lesia Ukrainka\",\"avg_grade\":\"96.0000000000000000\"}","timestamp":"2025-05-09T20:21:37.836Z"}
+{"level":"info","message":"Середні оцінки студентів: [{\"id\":5,\"name\":\"Vasyl Kisyl\",\"avg_grade\":\"89.6666666666666667\"},{\"id\":6,\"name\":\"Natalka Poltavka\",\"avg_grade\":\"89.3333333333333333\"},{\"id\":7,\"name\":\"Petro Mohyla\",\"avg_grade\":\"89.0000000000000000\"},{\"id\":8,\"name\":\"Lesia Ukrainka\",\"avg_grade\":\"96.0000000000000000\"}]","timestamp":"2025-05-09T20:21:58.208Z"}

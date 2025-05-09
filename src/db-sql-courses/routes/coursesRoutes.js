@@ -3,7 +3,7 @@ const router = express.Router();
 const logger = require('../db/logger');
 const Course = require('../models/courseModel');
 
-router.get('/courses', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const courses = await Course.getAll();
         logger.info(`Отримано список курсів: ${JSON.stringify(courses)}`);
@@ -14,7 +14,7 @@ router.get('/courses', async (req, res) => {
     }
 });
 
-router.get('/courses/count', async (req, res) => {
+router.get('/count', async (req, res) => {
     try {
         const courses = await Course.getStudentCountByCourse();
         logger.info(`Кількість студентів у курсах: ${JSON.stringify(courses)}`);
@@ -25,7 +25,7 @@ router.get('/courses/count', async (req, res) => {
     }
 });
 
-router.get('/courses/high-rated/:minGrade', async (req, res) => {
+router.get('/high-rated/:minGrade', async (req, res) => {
     try {
         const minGrade = parseFloat(req.params.minGrade);
         if (isNaN(minGrade)) {
@@ -42,7 +42,7 @@ router.get('/courses/high-rated/:minGrade', async (req, res) => {
     }
 });
 
-router.post('/courses', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { name } = req.body;
         if (!name) {
@@ -56,6 +56,7 @@ router.post('/courses', async (req, res) => {
 
         logger.info(`Курс доданий: ${JSON.stringify(result.rows[0])}`);
         res.status(201).json(result.rows[0]);
+        
     } catch (error) {
         logger.error(`Помилка додавання курсу: ${error.message}`);
         res.status(500).json({ error: 'Помилка додавання курсу' });

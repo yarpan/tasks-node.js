@@ -3,7 +3,7 @@ const router = express.Router();
 const logger = require('../db/logger');
 const Student = require('../models/studentModel');
 
-router.get('/students', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const students = await Student.getAll();
         logger.info(`Отримано список студентів: ${JSON.stringify(students)}`);
@@ -14,7 +14,7 @@ router.get('/students', async (req, res) => {
     }
 });
 
-router.get('/students/avg', async (req, res) => {
+router.get('/avg', async (req, res) => {
     try {
         const students = await Student.getAllWithAvgGrade();
         logger.info(`Середні оцінки студентів: ${JSON.stringify(students)}`);
@@ -25,7 +25,7 @@ router.get('/students/avg', async (req, res) => {
     }
 });
 
-router.get('/students/top', async (req, res) => {
+router.get('/top', async (req, res) => {
     try {
         const topStudent = await Student.getTopStudent();
         logger.info(`Топ-студент: ${JSON.stringify(topStudent)}`);
@@ -36,7 +36,7 @@ router.get('/students/top', async (req, res) => {
     }
 });
 
-router.post('/students', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { name } = req.body;
         if (!name) {

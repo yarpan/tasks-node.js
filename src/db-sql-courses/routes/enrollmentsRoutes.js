@@ -4,7 +4,7 @@ const pool = require('../db/connection');
 const logger = require('../db/logger');
 
 // Отримати всі записи `Enrollments`
-router.get('/enrollments', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const result = await pool.query(`
             SELECT s.name AS student_name, c.name AS course_name, e.grade
@@ -22,7 +22,7 @@ router.get('/enrollments', async (req, res) => {
 });
 
 // Додати запис `Enrollments`
-router.post('/enrollments', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { student_id, course_id, grade } = req.body;
         if (!student_id || !course_id || grade === undefined) {
