@@ -1,0 +1,175 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Online Courses API",
+    "description": "API для системи онлайн-курсів",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "tags": [
+    { "name": "Students", "description": "Операції зі студентами" },
+    { "name": "Courses", "description": "Операції з курсами" },
+    { "name": "Enrollments", "description": "Записи студентів у курсах" }
+  ],
+  "paths": {
+    "/students": {
+      "get": {
+        "summary": "Отримати всіх студентів",
+        "tags": ["Students"],
+        "responses": {
+          "200": { "description": "Список студентів" }
+        }
+      },
+      "post": {
+        "summary": "Додати нового студента",
+        "tags": ["Students"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Студент доданий" }
+        }
+      }
+    },
+    "/students/avg": {
+      "get": {
+        "summary": "Отримати середній бал студентів",
+        "tags": ["Students"],
+        "responses": {
+          "200": { "description": "Середні оцінки студентів" }
+        }
+      }
+    },
+    "/students/top": {
+      "get": {
+        "summary": "Отримати студента з найвищим середнім балом",
+        "tags": ["Students"],
+        "responses": {
+          "200": { "description": "Найкращий студент" }
+        }
+      }
+    },
+    "/students/course/{courseName}": {
+      "get": {
+        "summary": "Отримати список студентів за курсом",
+        "tags": ["Students"],
+        "parameters": [
+          {
+            "name": "courseName",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Назва курсу"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Список студентів" }
+        }
+      }
+    },
+    "/courses": {
+      "get": {
+        "summary": "Отримати всі курси",
+        "tags": ["Courses"],
+        "responses": {
+          "200": { "description": "Список курсів" }
+        }
+      },
+      "post": {
+        "summary": "Додати новий курс",
+        "tags": ["Courses"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Курс доданий" }
+        }
+      }
+    },
+    "/courses/count": {
+      "get": {
+        "summary": "Отримати кількість студентів у кожному курсі",
+        "tags": ["Courses"],
+        "responses": {
+          "200": { "description": "Кількість студентів у курсах" }
+        }
+      }
+    },
+    "/courses/high-rated/{minGrade}": {
+      "get": {
+        "summary": "Отримати курси з середнім балом > minGrade",
+        "tags": ["Courses"],
+        "parameters": [
+          {
+            "name": "minGrade",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" },
+            "description": "Мінімальний бал"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Список курсів" }
+        }
+      }
+    },
+    "/enrollments": {
+      "get": {
+        "summary": "Отримати всі записи студентів у курсах",
+        "tags": ["Enrollments"],
+        "responses": {
+          "200": { "description": "Список записів студентів у курсах" }
+        }
+      },
+      "post": {
+        "summary": "Записати студента на курс",
+        "tags": ["Enrollments"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "student_id": { "type": "integer" },
+                  "course_id": { "type": "integer" },
+                  "grade": { "type": "integer" }
+                },
+                "required": ["student_id", "course_id", "grade"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Студент записаний на курс" }
+        }
+      }
+    }
+  }
+}
