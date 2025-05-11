@@ -1,47 +1,76 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-require('dotenv').config();
+const { hashPassword, comparePassword } = require('../utils/hashHelper');
+const User = require('../models/User');
 
-const users = []; // Тимчасове сховище користувачів (замість БД)
+const registerUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
 
-const register = async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
-        return res.status(400).json({ error: 'Необхідно вказати email і password' });
+        if (await User.findOne({ where: { email } })) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+
+        const hashedPassword = await hashPassword(password);
+        await User.create({ email, password: hashedPassword });
+
+        res.status(201).json({ message: 'User successfully registered' });
+    } catch (error) {
+        console.error('Registration error:', error);
+        res.status(500).json({ message: 'Server error' });
     }
-
-    // Хешуємо пароль
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Додаємо користувача
-    users.push({ email, password: hashedPassword });
-
-    res.status(201).json({ message: 'Користувач зареєстрований' });
 };
 
 
-const login = async (req, res) => {
-    const { email, password } = req.body;
-    const user = users.find(u => u.email === email);
-    if (!user) {
-        return res.status(401).json({ error: 'Неправильний email або пароль' });
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ where: { email } });
+        if (!user || !(await comparePassword(password, user.password))) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        // last login refresh
+        user.lastLogin = new Date();
+        await user.save();
+
+        const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
+        res.json({ token });
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).json({ message: 'Server error' });
     }
-
-    // Перевіряємо пароль
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) {
-        return res.status(401).json({ error: 'Неправильний email або пароль' });
-    }
-
-    // Генеруємо JWT
-    const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-    res.json({ token });
 };
 
 
-const profile = (req, res) => {
-    res.json({ message: `Привіт, ${req.user.email}! Це твій профіль.` });
+const getProfile = async (req, res) => {
+    try {
+        const user = await User.findOne({ where: { email: req.user.email } });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.json({
+            email: user.email,
+            registeredAt: user.createdAt, // register time
+            lastLogin: user.lastLogin || 'Never logged in' // last login time
+        });
+    } catch (error) {
+        console.error('Profile error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
 };
 
-module.exports = { register, login, profile };
+
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.findAll({ attributes: ['id', 'email', 'createdAt', 'lastLogin'] });
+        res.json({ users });
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+module.exports = { registerUser, loginUser, getProfile, getAllUsers }
