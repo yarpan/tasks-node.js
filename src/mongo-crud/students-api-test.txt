@@ -1,0 +1,27 @@
+# Отримати всіх студентів
+curl -X GET http://localhost:5000/api/students
+
+# Додати нового студента
+curl -X POST http://localhost:5000/api/students \
+     -H "Content-Type: application/json" \
+     -d "{ \"name\": \"Dmytro\", \"age\": 24, \"group\": \"C-44\", \"marks\": [88, 91, 85] }"
+
+# Оновити вік студента (по ID, змініть <ID> на реальний)
+curl -X PUT http://localhost:5000/api/students/<ID> \
+     -H "Content-Type: application/json" \
+     -d "{ \"age\": 25 }"
+
+# Видалити студента із групи "A-31"
+curl -X DELETE http://localhost:5000/api/students/A-31
+
+# Знайти студентів старших 20 років
+curl -X GET "http://localhost:5000/api/students/filter?age=20"
+
+# Вибрати студентів з оцінкою вище 85
+curl -X GET "http://localhost:5000/api/students/filter?minMark=85"
+
+# Вивести студентів, у яких ім’я починається на "A"
+curl -X GET "http://localhost:5000/api/students/filter?namePrefix=A"
+
+# Відсортувати студентів за віком у спадному порядку
+curl -X GET "http://localhost:5000/api/students/filter?age=0"
