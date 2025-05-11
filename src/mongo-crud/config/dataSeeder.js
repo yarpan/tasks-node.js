@@ -17,7 +17,7 @@ const seedData = async () => {
     await Student.insertMany(students);
     console.log('Data seeded');
     
-    mongoose.connection.close(); // Закриває підключення коректно
+    mongoose.connection.close();
 };
 
 seedData();
